@@ -25,33 +25,45 @@ export class myBody extends HTMLElement{
                 switch(e.target.innerHTML){ 
                     case "+":
                         let valor = Number(divbtn.value);
-                        console.log(!isNaN(parseFloat(valor)));
-                        (!isNaN(parseFloat(valor)))? valor+=1 :divbtn.value = 1;
+                        (!isNaN(parseFloat(valor)))? valor+=1 :valor = 1;
                         divbtn.value = valor;
                         break;
                     case "-":
                         let valor2 = Number(divbtn.value);
-                        (!isNaN(parseFloat(valor2)))? valor2-=1 :divbtn.value = 1;
+                        (!isNaN(parseFloat(valor2)))? valor2-=1 :valor2 = 1;
                         divbtn.value = valor2;
                         (valor2 < 1)?pedidoNew.remove():"";
                         break;
                 }
             }
         })
-        butons.forEach(element => {
-        });
         contenedorPedidos.insertAdjacentElement("beforeend", pedidoNew);
-
         this.count++;
+    }
+
+    send(e){
+        let info=[],articulos =[],data = [], count=0 ;
+        let inputs = document.querySelectorAll("input");
+        inputs.forEach((element, id) => {
+            console.log(id);
+            if (id<=7) {
+                info[element.name] = element.value
+            }
+        });
+        console.log(info);
+
     }
     connectedCallback(){
         document.adoptedStyleSheets.push(styles);
         this.components().then(html =>{
             this.innerHTML = html;
             this.agregarPrmero();
+            
             this.addbtn = document.querySelector("#btnadd");
             this.addbtn.addEventListener("click", this.add.bind(this));
-            //this.sumarRestar(bind(this));
+            //se agrega el evento de mostrar los datos
+            this.sendD = document.querySelector("#btnsend");
+            this.sendD.addEventListener("click", this.send.bind(this));
         })
     }
     agregarPrmero(){
@@ -67,12 +79,12 @@ export class myBody extends HTMLElement{
                 switch(e.target.innerHTML){
                     case "+":
                         let valor = Number(divbtn.value);
-                        (!isNaN(parseFloat(valor)))? valor+=1 :divbtn.value = 1;
+                        (!isNaN(parseFloat(valor)))? valor+=1 :valor2 = 1;
                         divbtn.value = valor;
                         break;
                     case "-":
                         let valor2 = Number(divbtn.value);
-                        (!isNaN(parseFloat(valor2)))? valor2-=1 :divbtn.value = 1;
+                        (!isNaN(parseFloat(valor2)))? valor2-=1 :valor2 = 1;
                         divbtn.value = valor2;
                         (valor2 < 1)?pedidoNew.remove():"";
 
@@ -80,8 +92,6 @@ export class myBody extends HTMLElement{
                 }
             }
         })
-        butons.forEach(element => {
-        });
         contenedorPedidos.insertAdjacentElement("beforeend", pedidoNew);
 
     }

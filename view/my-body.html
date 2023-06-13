@@ -1,4 +1,4 @@
-<div id="contenedorPedidos" class="container bg-secondary bg-gradient rounded p-3" style="--bs-bg-opacity: .4; border-style: dashed;">
+<div id="contenedorPedidos" class="container bg-secondary bg-gradient rounded p-3 overflow-auto " style="--bs-bg-opacity: .4; border-style: dashed; min-height:100px; max-height: 300px;">
     <div id="pedidos" class="bg-gradient">
         <div style="display: none;">
             <div id="pedido_0"  class="row row-cols-1 row-cols-sm-2 row-cols-md-5">
@@ -31,7 +31,7 @@
 <div class="container g-0">
     <div class="row row-cols-sm-3 mt-3">
     <div>
-        <button type="button" class="btn w-100 btn-lg btn-outline-info">Send</button>
+        <button type="button" id="btnsend" class="btn w-100 btn-lg btn-outline-info">Send</button>
     </div>
     <div>
         <button type="button" class="btn w-100 btn-lg btn-outline-secondary">Details</button>
