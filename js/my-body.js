@@ -41,17 +41,34 @@ export class myBody extends HTMLElement{
         this.count++;
     }
 
-    send(e){
-        let info=[],articulos =[],data = [], count=0 ;
+    async send(e){
+        let info={},articulos ={},data = {},totalproductos = [], count=0 ;
         let inputs = document.querySelectorAll("input");
         inputs.forEach((element, id) => {
-            console.log(id);
             if (id<=7) {
-                info[element.name] = element.value
+                info[element.name] = element.value;
+            }else if(count < 5 && id>11){
+                articulos[element.name] = element.value;
+                count++;
+                if(count == 4){
+                    totalproductos.push(articulos);
+                    articulos = {};
+                    count=0;
+                }
             }
         });
-        console.log(info);
+        data.info = info;
+        data.products = totalproductos;
+        console.log(JSON.stringify(data));
 
+        let config = {
+            method:"POST",
+            Headers:{"Content-Type": "application/json"},
+            body:JSON.stringify(data),
+        }  
+        
+        let res =  await (await fetch("http://localhost/facturacion_mia/uploads/app.php", config)).text();
+        console.log(res);
     }
     connectedCallback(){
         document.adoptedStyleSheets.push(styles);
